@@ -2,14 +2,10 @@ import glob
 import os
 
 from typesense.api_call import ObjectNotFound
-from acdh_cfts_pyutils import TYPESENSE_CLIENT as client, CFTS_COLLECTION
+from acdh_cfts_pyutils import TYPESENSE_CLIENT as client
 from acdh_tei_pyutils.tei import TeiReader
-from acdh_tei_pyutils.utils import (
-    extract_fulltext,
-    check_for_hash,
-    get_xmlid,
-    make_entity_label,
-)
+from acdh_tei_pyutils.utils import extract_fulltext
+
 from tqdm import tqdm
 
 
