@@ -40,7 +40,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install Saxon, Ant and Fundament
+      - name: Install Saxon and Ant
         run: |
           sudo apt-get update && sudo apt-get install openjdk-11-jre-headless ant -y --no-install-recommends
           ./shellscripts/dl_saxon.sh
