@@ -11,7 +11,6 @@
     <xsl:import href="./partials/html_navbar.xsl"/>
     <xsl:import href="./partials/html_head.xsl"/>
     <xsl:import href="./partials/html_footer.xsl"/>
-    <xsl:import href="./partials/aot-options.xsl"/>
 
     <xsl:variable name="prev">
         <xsl:value-of select="replace(tokenize(data(tei:TEI/@prev), '/')[last()], '.xml', '.html')"/>
@@ -83,9 +82,6 @@
                                     </a>
                                 </xsl:if>
                             </div>
-                            <div id="editor-widget">
-                                <xsl:call-template name="annotation-options"></xsl:call-template>
-                            </div>
                         </div>
                         <xsl:apply-templates select=".//tei:body"></xsl:apply-templates>
                         <p style="text-align:center;">
@@ -119,9 +115,6 @@
                     </xsl:for-each>
                 </main>
                 <xsl:call-template name="html_footer"/>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/openseadragon.min.js"/>
-                <script src="https://unpkg.com/de-micro-editor@0.3.4/dist/de-editor.min.js"></script>
-                <script type="text/javascript" src="js/run.js"></script>
             </body>
         </html>
     </xsl:template>
