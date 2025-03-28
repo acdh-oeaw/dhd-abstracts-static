@@ -14,6 +14,6 @@ echo "fetch imprint"
 ./shellscripts/dl_imprint.sh
 
 python pythonscripts/check_and_delete.py
-
 add-attributes -g "./data/editions/*.xml" -b "https://dhd-abstracts.acdh.oeaw.ac.at"
 add-attributes -g "./data/meta/*.xml" -b "https://dhd-abstracts.acdh.oeaw.ac.at"
+python pythonscripts/harmonize_title.py

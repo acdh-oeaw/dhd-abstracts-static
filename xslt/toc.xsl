@@ -34,6 +34,8 @@
                                 <tr>
                                     <th scope="col" width="20" tabulator-formatter="html" tabulator-headerSort="false" tabulator-download="false">#</th>
                                     <th scope="col" tabulator-headerFilter="input">Titel</th>
+                                    <th scope="col" tabulator-headerFilter="input">Konferenz</th>
+                                    <th scope="col" tabulator-headerFilter="input">Kategorie</th>
                                     <th scope="col" tabulator-headerFilter="input">Dateinname</th>
                                 </tr>
                             </thead>
@@ -57,6 +59,22 @@
                                         <td>
                                             <xsl:value-of
                                                 select=".//tei:titleStmt/tei:title[1]/text()"/>
+                                        </td>
+                                        <td>
+                                            <xsl:value-of
+                                                select=".//tei:titleStmt/tei:title[1]/@n"/>
+                                        </td>
+                                        <td>
+                                            <xsl:choose>
+                                                <xsl:when test=".//tei:keywords[@n='subcategory']/tei:term/text()">
+                                                    <xsl:value-of
+                                                        select=".//tei:keywords[@n='subcategory']/tei:term/text()"/>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:value-of
+                                                        select=".//tei:keywords[@n='category']/tei:term/text()"/>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
                                         </td>
                                         <td>
                                             <xsl:value-of select="tokenize($full_path, '/')[last()]"
