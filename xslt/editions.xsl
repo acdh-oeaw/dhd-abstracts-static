@@ -35,15 +35,21 @@
                 <xsl:call-template name="html_head">
                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
                 </xsl:call-template>
-                <style>
-                    .navBarNavDropdown ul li:nth-child(2) {
-                        display: none !important;
-                    }
-                </style>
             </head>
             <body class="d-flex flex-column h-100">
                 <xsl:call-template name="nav_bar"/>
                 <main class="flex-shrink-0 flex-grow-1">
+                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="ps-5 p-3">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="index.html"><xsl:value-of select="$project_short_title"/></a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="toc.html">Alle Abstracts</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page"><xsl:value-of select="$doc_title"/></li>
+                        </ol>
+                    </nav>
                     <div class="container">
                         <div class="row">
                             <div class="col-md-2 col-lg-2 col-sm-12 text-start">
@@ -62,6 +68,9 @@
                                 <h1>
                                     <xsl:value-of select="$doc_title"/>
                                 </h1>
+                                <div>
+                                    <cite title="Autor*Innen"><xsl:value-of select="string-join(//tei:titleStmt//tei:persName/@n, '; ')"/></cite>
+                                </div>
                                 <div>
                                     <a href="{$teiSource}">
                                         <i class="bi bi-download fs-2" title="Zum TEI/XML Dokument" visually-hidden="true">
@@ -83,36 +92,24 @@
                                 </xsl:if>
                             </div>
                         </div>
-                        <xsl:apply-templates select=".//tei:body"></xsl:apply-templates>
-                        <p style="text-align:center;">
-                            <xsl:for-each select=".//tei:note[not(./tei:p)]">
-                                <div class="footnotes" id="{local:makeId(.)}">
-                                    <xsl:element name="a">
-                                        <xsl:attribute name="name">
-                                            <xsl:text>fn</xsl:text>
-                                            <xsl:number level="any" format="1" count="tei:note"/>
-                                        </xsl:attribute>
-                                        <a>
-                                            <xsl:attribute name="href">
-                                                <xsl:text>#fna_</xsl:text>
-                                                <xsl:number level="any" format="1" count="tei:note"/>
-                                            </xsl:attribute>
-                                            <span style="font-size:7pt;vertical-align:super; margin-right: 0.4em">
-                                                <xsl:number level="any" format="1" count="tei:note"/>
-                                            </span>
-                                        </a>
-                                    </xsl:element>
-                                    <xsl:apply-templates/>
-                                </div>
-                            </xsl:for-each>
-                        </p>
-
-                    </div>
-                    <xsl:for-each select="//tei:back">
-                        <div class="tei-back">
-                            <xsl:apply-templates/>
+                        <div class="row">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <xsl:apply-templates select=".//tei:body"></xsl:apply-templates>
+                                <xsl:if test=".//tei:listBibl">
+                                    <hr />
+                                    <h2>Bibliographie</h2>
+                                    <ul>
+                                        <xsl:for-each select=".//tei:listBibl//tei:bibl">
+                                            <li><xsl:apply-templates/></li>
+                                        </xsl:for-each>
+                                    </ul>
+                                </xsl:if>
+                            </div>
+                            <div class="col-lg-2"></div>
                         </div>
-                    </xsl:for-each>
+                        
+                    </div>
                 </main>
                 <xsl:call-template name="html_footer"/>
             </body>
