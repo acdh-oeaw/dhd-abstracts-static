@@ -26,10 +26,15 @@
             <body class="d-flex flex-column h-100">
                 <xsl:call-template name="nav_bar"/>
                 <main class="flex-shrink-0 flex-grow-1">
-                    <div class="container">
-                        <xsl:call-template name="one_time_alert"/>
-                        <h1><xsl:value-of select="$project_short_title"/></h1>
-                        <h2><xsl:value-of select="$project_title"/></h2>
+                    <div class="px-4 py-5 my-5 text-center">
+                            <h1 class="display-5 fw-bold text-body-emphasis">DHd Abstracts</h1>
+                            <div class="col-lg-6 mx-auto">
+                                <p class="lead mb-4">Auf dieser Seite können Sie alle Abstracts der vergangenen DHd-Konferenzen im Volltext durchsuchen. Die Daten dafür wurden vom <a href="https://github.com/DHd-Verband">DHd-Verband via GitHub-Repos</a> veröffentlicht.</p>
+                                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                                    <a href="search.html" class="btn btn-primary btn-lg px-4 gap-3">Suchen</a>
+                                    <a href="toc.html" class="btn btn-outline-secondary btn-lg px-4">Stöbern</a>
+                                </div>
+                            </div>
                     </div>
                 </main>
                 <xsl:call-template name="html_footer"/>

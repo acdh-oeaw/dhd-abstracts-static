@@ -15,44 +15,18 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projekt</a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="about.html">Über das Projekt</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="imprint.html">Impressum</a>
-                                    </li>
-                                </ul>
-                            </li>
-
                             <li class="nav-item">
-                                <a class="nav-link" href="toc.html">Editionseinheiten</a>
+                                <a class="nav-link" href="toc.html">Stöbern</a>
                             </li>
-
-                            <!-- <li class="nav-item dropdown disabled">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Register</a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="listperson.html">Personen</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="listplace.html">Orte</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="listorg.html">Organisationen</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="listbibl.html">Werke</a>
-                                    </li>
-                                </ul>
-                            </li> -->
-
                             <li class="nav-item">
-                                <a title="Suche" class="nav-link" href="search.html">Suche</a>
+                                <a title="Suche" class="nav-link" href="search.html">Suchen</a>
                             </li>
                         </ul>
+                        <form class="d-flex" role="search" method="GET" action="search.html">
+                            <input class="form-control me-2" type="search" placeholder="Suche" aria-label="Suche" name="dhd-abstracts[query]"></input>
+                            <button class="btn btn-outline-secondary" type="submit">Search</button>
+                        </form>
+                        
                     </div>
                 </div>
             </nav>
