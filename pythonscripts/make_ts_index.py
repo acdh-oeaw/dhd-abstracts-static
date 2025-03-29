@@ -61,6 +61,12 @@ current_schema = {
             "optional": True,
             "facet": True,
         },
+        {
+            "name": "authors",
+            "type": "string[]",
+            "optional": True,
+            "facet": True,
+        },
     ],
 }
 
@@ -80,6 +86,9 @@ for x in tqdm(files, total=len(files)):
     record["id"] = os.path.split(x)[-1].replace(".xml", "")
     record["rec_id"] = os.path.split(x)[-1].replace(".xml", "")
     record["year"] = int(doc_id.split("-")[1])
+    record["authors"] = []
+    for x in doc.any_xpath(".//tei:persName[@n]"):
+        record["authors"].append(x.attrib["n"])
     try:
         record["category"] = doc.any_xpath(".//tei:keywords[@n='category']/tei:term")[0].text
     except IndexError:

@@ -11,7 +11,7 @@
     <xsl:import href="partials/html_footer.xsl"/>
     <xsl:template match="/">
         <xsl:variable name="doc_title" select="'Volltextsuche'"/>
-        <html lang="en" class="h-100">
+        <html lang="de" class="h-100">
             <head>
                 <xsl:call-template name="html_head">
                     <xsl:with-param name="html_title" select="$doc_title"/>
@@ -45,6 +45,7 @@
                             <div class="col-md-3">
                                 <h2>Facets</h2>
                                 <div id="refinement-list-year" class="pb-3"></div>
+                                <div id="refinement-list-authors" class="pb-3"></div>
                                 <div id="refinement-list-category" class="pb-3"></div>
                                 <div id="refinement-list-subcategory" class="pb-3"></div>
                                 <div id="refinement-list-topics" class="pb-3"></div>

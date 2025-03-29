@@ -61,7 +61,9 @@ search.addWidgets([
       empty: "Keine Resultate für <q>{{ query }}</q>",
       item(hit, { html, components }) {
         return html` <div>
-          <div class="fs-3"><a href="${hit.rec_id}.html">${hit.title}</a></div>
+        <div class="text-start">DHd-${hit.year}</div>
+          <div class="text-end">${hit.authors.join("; ")}</div>
+          <div class="fs-5"><a href="${hit.rec_id}.html">${hit.title}</a></div>
           <p>
             ${hit._snippetResult.full_text.matchedWords.length > 0
               ? components.Snippet({ hit, attribute: "full_text" })
@@ -104,6 +106,24 @@ search.addWidgets([
   }),
 
   // FACETS
+
+  instantsearch.widgets.panel({
+    collapsed: ({ state }) => {
+      return state.query.length === 0;
+    },
+    templates: {
+      header: "Autor*Innen",
+    },
+  })(instantsearch.widgets.refinementList)({
+    container: "#refinement-list-authors ",
+    attribute: "authors",
+    searchable: true,
+    showMore: true,
+    showMoreLimit: 50,
+    limit: 10,
+    searchablePlaceholder: "Suche nach Autor*Innen",
+    cssClasses: DEFAULT_CSS_CLASSES,
+  }),
 
   instantsearch.widgets.panel({
     collapsed: ({ state }) => {
