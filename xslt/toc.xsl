@@ -34,6 +34,7 @@
                                 <tr>
                                     <th scope="col" width="20" tabulator-formatter="html" tabulator-headerSort="false" tabulator-download="false">#</th>
                                     <th scope="col" tabulator-headerFilter="input">Titel</th>
+                                    <th scope="col" tabulator-headerFilter="input" tabulator-formatter="html">AutorInnen</th>
                                     <th scope="col" tabulator-headerFilter="input">Konferenz</th>
                                     <th scope="col" tabulator-headerFilter="input">Kategorie</th>
                                     <th scope="col" tabulator-headerFilter="input">Dateinname</th>
@@ -59,6 +60,13 @@
                                         <td>
                                             <xsl:value-of
                                                 select=".//tei:titleStmt/tei:title[1]/text()"/>
+                                        </td>
+                                        <td>
+                                            <ul>
+                                                <xsl:for-each select=".//tei:titleStmt//tei:persName/@n">
+                                                    <li><xsl:value-of select="."/></li>
+                                                </xsl:for-each>
+                                            </ul>
                                         </td>
                                         <td>
                                             <xsl:value-of

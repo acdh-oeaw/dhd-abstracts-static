@@ -16,6 +16,9 @@ for x in tqdm(files):
                 del tag['xml:id']
             if tag.has_attr('id'):
                 del tag['id']
+        for name in soup.find_all('author'):
+            for direct_name in name.find_all('name', recursive=False):
+                direct_name.name = 'persName'
     with open(x, 'w', encoding='utf-8') as output:
         output.write(str(soup))
     try:
