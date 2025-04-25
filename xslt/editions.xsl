@@ -69,7 +69,20 @@
                                     <xsl:value-of select="$doc_title"/>
                                 </h1>
                                 <div>
-                                    <cite title="Autor*Innen"><xsl:value-of select="string-join(//tei:titleStmt//tei:persName/@n, '; ')"/></cite>
+                                    <cite title="Autor*Innen">
+                                        <xsl:value-of select="string-join(//tei:titleStmt//tei:persName/@n, '; ')"/>
+                                        <xsl:choose>
+                                            <xsl:when test=".//tei:idno[@subtype='zenodo']">
+                                                <br />
+                                                <a>
+                                                    <xsl:attribute name="href">
+                                                        <xsl:value-of select=".//tei:idno[@subtype='zenodo']/text()"/>
+                                                    </xsl:attribute>
+                                                    <xsl:value-of select=".//tei:idno[@subtype='zenodo']/text()"/>
+                                                </a>
+                                            </xsl:when>
+                                        </xsl:choose>
+                                    </cite>
                                 </div>
                                 <div>
                                     <a href="{$teiSource}">
