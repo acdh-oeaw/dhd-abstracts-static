@@ -76,13 +76,15 @@ records = []
 cfts_records = []
 for x in tqdm(files, total=len(files)):
     record = {}
-
     doc = TeiReader(x)
     try:
         body = doc.any_xpath(".//tei:body")[0]
     except IndexError:
         continue
     doc_id = os.path.split(x)[-1].replace(".xml", "")
+    title = extract_fulltext(
+        doc.any_xpath(".//tei:titleStmt/tei:title[1]")[0]
+    )
     record["id"] = os.path.split(x)[-1].replace(".xml", "")
     record["rec_id"] = os.path.split(x)[-1].replace(".xml", "")
     record["year"] = int(doc_id.split("-")[1])
@@ -103,11 +105,8 @@ for x in tqdm(files, total=len(files)):
     record["keywords"] = []
     for x in doc.any_xpath(".//tei:keywords[@n='keywords']/tei:term"):
         record["keywords"].append(x.text)
-    record["title"] = extract_fulltext(
-        doc.any_xpath(".//tei:titleStmt/tei:title[1]")[0]
-    )
-
-    record["full_text"] = extract_fulltext(body, tag_blacklist=tag_blacklist)
+    record["title"] = title
+    record["full_text"] = extract_fulltext(body, tag_blacklist=tag_blacklist) + title
     records.append(record)
 
 make_index = client.collections[COLLECTION_NAME].documents.import_(records)
