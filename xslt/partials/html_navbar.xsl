@@ -24,7 +24,7 @@
                         </ul>
                         <form class="d-flex" role="search" method="GET" action="search.html">
                             <input class="form-control me-2" type="search" placeholder="Suche" aria-label="Suche" name="dhd-abstracts[query]"></input>
-                            <button class="btn btn-outline-secondary" type="submit">Search</button>
+                            <button class="btn btn-primary" type="submit">Search</button>
                         </form>
                         
                     </div>

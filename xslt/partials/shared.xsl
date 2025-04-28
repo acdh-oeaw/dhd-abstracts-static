@@ -3,16 +3,19 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:tei="http://www.tei-c.org/ns/1.0"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:local="http://dse-static.foo.bar"
+    
     exclude-result-prefixes="xs"
     version="2.0">
-    <xsl:function name="local:makeId" as="xs:string">
-        <xsl:param name="currentNode" as="node()"/>
-        <xsl:variable name="nodeCurrNr">
-            <xsl:value-of select="count($currentNode//preceding-sibling::*) + 1"/>
-        </xsl:variable>
-        <xsl:value-of select="concat(name($currentNode), '__', $nodeCurrNr)"/>
-    </xsl:function>
+    
+    <xsl:template match="tei:figure">
+        <figure class="figure">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>
+                <figcaption class="figure-caption">
+                    <xsl:value-of select="./tei:*"/>
+                </figcaption>
+        </figure>
+    </xsl:template>
+    
     <xsl:template match="tei:div">
         <div><xsl:apply-templates/></div>
     </xsl:template>
@@ -26,6 +29,21 @@
         <blockquote class="blockquote">
             <p><xsl:apply-templates/></p>
         </blockquote>
+    </xsl:template>
+    
+    <xsl:template match="tei:ref">
+        <a class="ref {@type}" href="{@target}">
+            <xsl:apply-templates/>
+        </a>
+    </xsl:template>
+    
+    <xsl:template match="tei:ref[@n]">
+        <a id="{'ftn_a'||@n}" href="{'#ftn'||@n}">
+            <sup>
+                <xsl:value-of select="@n"/>
+            </sup>
+        </a>
+        <xsl:text>&#160;</xsl:text>
     </xsl:template>
 
     
@@ -49,18 +67,23 @@
 
     
 
-    <xsl:template match="tei:ref">
-        <a class="ref {@type}" href="{@target}"><xsl:apply-templates/></a>
-    </xsl:template>
+    
     <xsl:template match="tei:p">
        <p><xsl:apply-templates/></p>
     </xsl:template>
+    
+    <xsl:template match="tei:table/tei:head"/>
     
     <xsl:template match="tei:table">
         <xsl:element name="table">
             <xsl:attribute name="class">
                 <xsl:text>table table-bordered table-striped table-condensed table-hover</xsl:text>
             </xsl:attribute>
+            <xsl:choose>
+                <xsl:when test="./tei:head">
+                    <caption><xsl:value-of select="."/></caption>
+                </xsl:when>
+            </xsl:choose>
             <xsl:element name="tbody">
                 <xsl:apply-templates/>
             </xsl:element>

@@ -17,7 +17,7 @@
         <xsl:variable name="doc_title">
             <xsl:value-of select='"DHd-Abstracts"'/>
         </xsl:variable>
-        <html class="h-100">
+        <html class="h-100" lang="de">
             <head>
                 <xsl:call-template name="html_head">
                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
@@ -31,7 +31,7 @@
                             <div class="col-lg-6 mx-auto">
                                 <p class="lead mb-4">Auf dieser Seite können Sie alle Abstracts der vergangenen DHd-Konferenzen im Volltext durchsuchen. Die Daten dafür wurden vom <a href="https://github.com/DHd-Verband">DHd-Verband via GitHub-Repos</a> veröffentlicht.</p>
                                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                                    <a href="search.html" class="btn btn-primary btn-lg px-4 gap-3">Suchen</a>
+                                    <a href="search.html" class="btn btn-outline-secondary btn-lg px-4 gap-3">Suchen</a>
                                     <a href="toc.html" class="btn btn-outline-secondary btn-lg px-4">Stöbern</a>
                                 </div>
                             </div>

@@ -30,7 +30,7 @@
 
 
     <xsl:template match="/">
-        <html class="h-100">
+        <html class="h-100" lang="de">
             <head>
                 <xsl:call-template name="html_head">
                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
@@ -109,6 +109,21 @@
                             <div class="col-lg-2"></div>
                             <div class="col-lg-8">
                                 <xsl:apply-templates select=".//tei:body"></xsl:apply-templates>
+                                <xsl:if test=".//tei:div[contains(@type, 'otes')]">
+                                    <hr />
+                                    <h2>Fußnoten</h2>
+                                    <xsl:for-each select=".//tei:div[contains(@type, 'otes')]/tei:note">
+                                        <div>
+                                            <a id="{'ftn'||@n}" href="{'#ftn_a'||@n}">
+                                                <sup>
+                                                    <xsl:value-of select="./@n"/>
+                                                </sup>
+                                            </a>
+                                            <xsl:text> </xsl:text>
+                                            <xsl:apply-templates/>
+                                        </div>
+                                    </xsl:for-each>
+                                </xsl:if>
                                 <xsl:if test=".//tei:listBibl">
                                     <hr />
                                     <h2>Bibliographie</h2>
