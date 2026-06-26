@@ -82,9 +82,7 @@ for x in tqdm(files, total=len(files)):
     except IndexError:
         continue
     doc_id = os.path.split(x)[-1].replace(".xml", "")
-    title = extract_fulltext(
-        doc.any_xpath(".//tei:titleStmt/tei:title[1]")[0]
-    )
+    title = extract_fulltext(doc.any_xpath(".//tei:titleStmt/tei:title[1]")[0])
     record["id"] = os.path.split(x)[-1].replace(".xml", "")
     record["rec_id"] = os.path.split(x)[-1].replace(".xml", "")
     record["year"] = int(doc_id.split("-")[1])
@@ -92,11 +90,15 @@ for x in tqdm(files, total=len(files)):
     for x in doc.any_xpath(".//tei:persName[@n]"):
         record["authors"].append(x.attrib["n"])
     try:
-        record["category"] = doc.any_xpath(".//tei:keywords[@n='category']/tei:term")[0].text
+        record["category"] = doc.any_xpath(".//tei:keywords[@n='category']/tei:term")[
+            0
+        ].text
     except IndexError:
         pass
     try:
-        record["subcategory"] = doc.any_xpath(".//tei:keywords[@n='subcategory']/tei:term")[0].text
+        record["subcategory"] = doc.any_xpath(
+            ".//tei:keywords[@n='subcategory']/tei:term"
+        )[0].text
     except IndexError:
         pass
     record["topics"] = []
